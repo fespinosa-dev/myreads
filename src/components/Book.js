@@ -16,7 +16,6 @@ class Book extends Component {
     }
 
     render() {
-        console.log(this.state.options)
         return (
             <div className="book">
                 <div className="book-top">
