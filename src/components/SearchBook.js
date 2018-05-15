@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Book from './Book'
 import * as BooksAPI from '../utils/BooksAPI'
 
@@ -15,26 +16,30 @@ class SearchBook extends Component {
         BooksAPI.search(this.state.query)
             .then((searchResult) => {
                 if (searchResult instanceof Array) {
-
-                    let mybooks = this.props.mybooks;
-
-                    for (let index = 0; index < mybooks.length; index++) {
-                        const myBook = mybooks[index];
-
-                        let myBookFound = searchResult.find((book)=>{
-                            return book.id === myBook.id;
-                        });
-
-                        if(myBookFound !== undefined){
-                            myBookFound.shelf = myBook.shelf;
-                        }
-                    }
+                    this.syncBookShelfStates(searchResult);
                     this.setState({ booksFound: searchResult });
                 }
             }).catch((err) => {
                 console.log('Error searching books', err);
             });
         event.preventDefault();
+    }
+
+
+    // sync up books states of this page with the main one
+    syncBookShelfStates(booksFound){
+        let myBooks = this.props.myBooks;
+        for (let index = 0; index < myBooks.length; index++) {
+            const myBook = myBooks[index];
+
+            let myBookFound = booksFound.find((book) => {
+                return book.id === myBook.id;
+            });
+
+            if (myBookFound !== undefined) {
+                myBookFound.shelf = myBook.shelf;
+            }
+        }
     }
 
 
@@ -67,6 +72,11 @@ class SearchBook extends Component {
 
         )
     }
+}
+
+SearchBook.propTypes = {
+    myBooks : PropTypes.object,
+    onChangeShelf : PropTypes.func
 }
 
 export default SearchBook

@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import Book from './Book'
+import PropTypes from 'prop-types'
+
 
 class Shelve extends Component{
 
@@ -23,6 +25,14 @@ class Shelve extends Component{
             </div>
         )
     }
+}
+
+Shelve.propTypes = {
+
+    title : PropTypes.string,
+    onChangeShelf : PropTypes.func,
+    books : PropTypes.array
+    
 }
 
 export default Shelve

@@ -65,7 +65,7 @@ class MyReadApp extends Component {
                     </div>
                 }} />
                 <Route  path="/search" render={() =>{
-                    return <SearchBook mybooks={this.state.books} onChangeShelf={this.updateBookShelf} />
+                    return <SearchBook myBooks={this.state.books} onChangeShelf={this.updateBookShelf} />
                 }}/>
 
             </div>
