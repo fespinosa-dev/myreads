@@ -19,7 +19,6 @@ class Shelve extends Component{
                                         image = { book.imageLinks.thumbnail}/>
                     })}
                     </ol>
-
                 </div>
             </div>
         )

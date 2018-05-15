@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router-dom'
-import SearchBook from './SearchBook';
-import * as BooksAPI from './BooksAPI'
-import Shelve from './Shelve'
-import './App.css'
+import SearchBook from './components/SearchBook';
+import * as BooksAPI from './utils/BooksAPI'
+import Shelve from './components/Shelve'
+import './MyReadApp.css'
 
 class MyReadApp extends Component {
 
@@ -27,8 +27,7 @@ class MyReadApp extends Component {
 
         }))
 
-
-        // BooksAPI.update(book, book.destShelf);
+        BooksAPI.update(_book, _book.destShelf);
     };
 
 
@@ -65,7 +64,9 @@ class MyReadApp extends Component {
                         </div>
                     </div>
                 }} />
-                <Route  path="/search" component={SearchBook}/>
+                <Route  path="/search" render={() =>{
+                    return <SearchBook onChangeShelf={this.updateBookShelf} />
+                }}/>
 
             </div>
         )
