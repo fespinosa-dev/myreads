@@ -10,19 +10,20 @@ class SearchBook extends Component {
 
     handleChange = (event) => {
         this.setState({ query: event.target.value });
+        this.performSearch();
     }
 
-    handleSubmit = (event) => {
+    performSearch(){
         BooksAPI.search(this.state.query)
             .then((searchResult) => {
                 if (searchResult instanceof Array) {
+                    searchResult.map((book)=> book.shelf = 'none'); 
                     this.syncBookShelfStates(searchResult);
                     this.setState({ booksFound: searchResult });
                 }
             }).catch((err) => {
                 console.log('Error searching books', err);
             });
-        event.preventDefault();
     }
 
 
@@ -32,12 +33,12 @@ class SearchBook extends Component {
         for (let index = 0; index < myBooks.length; index++) {
             const myBook = myBooks[index];
 
-            let myBookFound = booksFound.find((book) => {
+            let bookFound = booksFound.find((book) => {
                 return book.id === myBook.id;
             });
 
-            if (myBookFound !== undefined) {
-                myBookFound.shelf = myBook.shelf;
+            if (bookFound !== undefined) {
+                bookFound.shelf = myBook.shelf;
             }
         }
     }
@@ -45,7 +46,7 @@ class SearchBook extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form>
                 <div className="search-books">
                     <div className="search-books-bar">
                         <a className="close-search" href="/" >Close</a>
@@ -55,15 +56,9 @@ class SearchBook extends Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            {this.state.booksFound.map(book => {
-                                return <Book key={book.id}
-                                    bookId={book.id}
-                                    onChangeShelf={this.props.onChangeShelf}
-                                    bookShelf={book.shelf}
-                                    title={book.title}
-                                    authors={book.authors}
-                                    image={book.imageLinks.thumbnail} />
-                            })}
+                            {this.state.query ?this.state.booksFound.map(book => {
+                                return <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf} />
+                            }): ''}
                         </ol>
                     </div>
                 </div>

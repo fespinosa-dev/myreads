@@ -4,26 +4,28 @@ import PropTypes from 'prop-types'
 class Book extends Component {
 
     state = {
-        optionValue: this.props.bookShelf
+        optionValue: this.props.book.shelf
     }
 
     handleChange = (event) => {
         this.setState({ optionValue: event.target.value });
-        this.props.onChangeShelf({
-            id: this.props.bookId,
-            shelf: this.props.bookShelf,
-            destShelf: event.target.value
-        })
+        let book = this.props.book;
+        book.destShelf = event.target.value;
+
+        this.props.onChangeShelf(book);
     }
 
     render() {
+        let book = this.props.book;
         return (
             <div className="book">
                 <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url("${this.props.image}")` }}></div>
+                    <div className="book-cover" style={{
+                        width: 128, height: 192, backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail ? `${book.imageLinks.thumbnail}` : `http://via.placeholder.com/128x193?text=No%20Cover`})`
+                    }}></div>
                     <div className="book-shelf-changer">
                         <select value={this.state.optionValue} onChange={this.handleChange}>
-                            <option value="none" disabled>Move to...</option>
+                            <option disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
                             <option value="read" >Read</option>
@@ -31,8 +33,8 @@ class Book extends Component {
                         </select>
                     </div>
                 </div>
-                <div className="book-title">{this.props.title}</div>
-                <div className="book-authors">{this.props.authors}</div>
+                <div className="book-title">{book.title}</div>
+                <div className="book-authors">{Array.isArray(book.authors) ? book.authors.join(', ') : ''}</div>
             </div>
         )
     }
@@ -41,12 +43,7 @@ class Book extends Component {
 }
 
 Book.propTypes = {
-    image : PropTypes.string,
-    title : PropTypes.string,
-    authors : PropTypes.array,
-    onChangeShelf : PropTypes.func,
-    bookId : PropTypes.string,
-    bookShelf : PropTypes.string
+    book: PropTypes.object
 }
 
 export default Book
