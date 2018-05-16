@@ -75,7 +75,7 @@ class SearchBook extends Component {
 }
 
 SearchBook.propTypes = {
-    myBooks : PropTypes.object,
+    myBooks : PropTypes.array,
     onChangeShelf : PropTypes.func
 }
 

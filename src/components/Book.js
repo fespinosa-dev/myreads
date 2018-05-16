@@ -40,10 +40,10 @@ class Book extends Component {
 
 }
 
-Book.PropTypes = {
+Book.propTypes = {
     image : PropTypes.string,
     title : PropTypes.string,
-    authors : PropTypes.string,
+    authors : PropTypes.array,
     onChangeShelf : PropTypes.func,
     bookId : PropTypes.string,
     bookShelf : PropTypes.string
