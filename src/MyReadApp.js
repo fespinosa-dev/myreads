@@ -16,7 +16,6 @@ class MyReadApp extends Component {
 
     updateBookShelf = (_book) => {
         this.setState((prevState) => ({
-
             books: prevState.books.map((book) => {
                 if (_book.id === book.id) {
                     book.shelf = _book.destShelf;

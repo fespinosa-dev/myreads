@@ -13,6 +13,10 @@ class SearchBook extends Component {
         this.performSearch();
     }
 
+    handleSubmit(event){
+        event.preventDefault();
+    }
+
     performSearch(){
         BooksAPI.search(this.state.query)
             .then((searchResult) => {
@@ -21,9 +25,7 @@ class SearchBook extends Component {
                     this.syncBookShelfStates(searchResult);
                     this.setState({ booksFound: searchResult });
                 }
-            }).catch((err) => {
-                console.log('Error searching books', err);
-            });
+            }).catch((err) => console.log('Error searching books', err));
     }
 
 
@@ -33,9 +35,7 @@ class SearchBook extends Component {
         for (let index = 0; index < myBooks.length; index++) {
             const myBook = myBooks[index];
 
-            let bookFound = booksFound.find((book) => {
-                return book.id === myBook.id;
-            });
+            let bookFound = booksFound.find((book) => book.id === myBook.id);
 
             if (bookFound !== undefined) {
                 bookFound.shelf = myBook.shelf;
@@ -46,7 +46,7 @@ class SearchBook extends Component {
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <div className="search-books">
                     <div className="search-books-bar">
                         <a className="close-search" href="/" >Close</a>
@@ -56,9 +56,9 @@ class SearchBook extends Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            {this.state.query ?this.state.booksFound.map(book => {
-                                return <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf} />
-                            }): ''}
+                            {this.state.query ?this.state.booksFound.map(book => 
+                             <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf} />
+                        ): ''}
                         </ol>
                     </div>
                 </div>

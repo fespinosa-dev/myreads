@@ -11,7 +11,7 @@ class Shelve extends Component{
                 <h2 className="bookshelf-title">{this.props.title}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {this.props.books.map(book => { return <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf}/>})}
+                        {this.props.books.map(book => <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf}/>)}
                     </ol>
                 </div>
             </div>
