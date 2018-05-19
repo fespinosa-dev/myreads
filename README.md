@@ -10,7 +10,7 @@ git clone https://github.com/fjevictoriano/myreads.git
 
 Go to the folder where you cloned the repository
 
-npm run build && npm start. You should be able to see the app running on your default browser. 
+npm i && npm start. You should be able to see the app running on your default browser. 
 
 ```
 
