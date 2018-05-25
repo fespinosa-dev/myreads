@@ -1,22 +1,19 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
 
 
-class Shelve extends Component{
-
-    render(){
+const Shelve = (props) =>{
         return (
             <div className="bookshelf">
-                <h2 className="bookshelf-title">{this.props.title}</h2>
+                <h2 className="bookshelf-title">{props.title}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {this.props.books.map(book => <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf}/>)}
+                        {props.books.map(book => <Book key={book.id} book={book} onChangeShelf={props.onChangeShelf}/>)}
                     </ol>
                 </div>
             </div>
         )
-    }
 }
 
 Shelve.propTypes = {

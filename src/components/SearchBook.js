@@ -5,25 +5,22 @@ import * as BooksAPI from '../utils/BooksAPI'
 
 class SearchBook extends Component {
 
-    state = { query: '' }
     state = { booksFound: [] }
 
     handleChange = (event) => {
-        this.setState({ query: event.target.value });
-        this.performSearch();
+        this.performSearch(event.target.value);
     }
 
-    handleSubmit(event){
-        event.preventDefault();
-    }
-
-    performSearch(){
-        BooksAPI.search(this.state.query)
+    performSearch(query){
+        console.log(query)
+        BooksAPI.search(query)
             .then((searchResult) => {
                 if (searchResult instanceof Array) {
                     searchResult.map((book)=> book.shelf = 'none'); 
-                    this.syncBookShelfStates(searchResult);
                     this.setState({ booksFound: searchResult });
+                    
+                }else{
+                    this.setState({ booksFound: [] });
                 }
             }).catch((err) => console.log('Error searching books', err));
     }
@@ -46,7 +43,7 @@ class SearchBook extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form >
                 <div className="search-books">
                     <div className="search-books-bar">
                         <a className="close-search" href="/" >Close</a>
@@ -56,7 +53,7 @@ class SearchBook extends Component {
                     </div>
                     <div className="search-books-results">
                         <ol className="books-grid">
-                            {this.state.query ?this.state.booksFound.map(book => 
+                            {this.state.booksFound ? this.state.booksFound.map(book => 
                              <Book key={book.id} book={book} onChangeShelf={this.props.onChangeShelf} />
                         ): ''}
                         </ol>
