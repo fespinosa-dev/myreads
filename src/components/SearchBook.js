@@ -18,7 +18,7 @@ class SearchBook extends Component {
                 if (searchResult instanceof Array) {
                     searchResult.map((book)=> book.shelf = 'none'); 
                     this.setState({ booksFound: searchResult });
-                    
+                    syncBookShelfStates(booksFound)
                 }else{
                     this.setState({ booksFound: [] });
                 }
