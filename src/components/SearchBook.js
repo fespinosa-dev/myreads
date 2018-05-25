@@ -12,13 +12,16 @@ class SearchBook extends Component {
     }
 
     performSearch(query){
-        console.log(query)
+        if(!query){
+            this.setState({booksFound : []});
+            return;
+        }
         BooksAPI.search(query)
             .then((searchResult) => {
                 if (searchResult instanceof Array) {
                     searchResult.map((book)=> book.shelf = 'none'); 
+                    this.syncBookShelfStates(searchResult);
                     this.setState({ booksFound: searchResult });
-                    syncBookShelfStates(booksFound)
                 }else{
                     this.setState({ booksFound: [] });
                 }
