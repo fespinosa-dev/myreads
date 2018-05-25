@@ -12,10 +12,6 @@ class SearchBook extends Component {
     }
 
     performSearch(query){
-        if(!query){
-            this.setState({booksFound : []});
-            return;
-        }
         BooksAPI.search(query)
             .then((searchResult) => {
                 if (searchResult instanceof Array) {
