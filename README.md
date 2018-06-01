@@ -4,7 +4,7 @@ Bookshelf app that allows you to select and categorize books you have read, are 
 
 ## Installation
 ```
-You should have npm install to build and run the app [node-npm](https://www.npmjs.com/get-npm).
+You should have npm installed to build and run the app [node-npm](https://www.npmjs.com/get-npm).
 
 git clone https://github.com/fjevictoriano/myreads.git
 
