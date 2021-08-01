@@ -1,5 +1,11 @@
 # MyReads
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f13e39997a2245eabf01d76e2221c976)](https://www.codacy.com/gh/fespinosa-dev/myreads/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=fespinosa-dev/myreads&amp;utm_campaign=Badge_Grade)
+&nbsp; &nbsp; &nbsp; &nbsp;
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B6?s&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/fjevictoriano/)
+
+
+
 Bookshelf app that allows you to select and categorize books you have read, are currently reading, or want to read. The project was build using React.
 
 ## Installation
